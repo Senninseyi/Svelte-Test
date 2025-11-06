@@ -87,24 +87,24 @@
 	}}
 >
 	<div
-		class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+		class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto m-2 sm:m-0"
 		role="document"
 		onclick={(e) => e.stopPropagation()}
 		onkeydown={(e) => e.stopPropagation()}
 	>
-		<form onsubmit={handleSubmit} class="p-6">
+		<form onsubmit={handleSubmit} class="p-4 sm:p-6">
 			<!-- Header -->
-			<div class="flex items-center justify-between mb-6">
-				<h2 id="form-title" class="text-2xl font-bold text-gray-900">
+			<div class="flex items-center justify-between mb-4 sm:mb-6">
+				<h2 id="form-title" class="text-xl sm:text-2xl font-bold text-gray-900">
 					{isEditing ? 'Edit Task' : 'New Task'}
 				</h2>
 				<button
 					type="button"
-					class="text-gray-400 hover:text-gray-600 transition-colors"
+					class="text-gray-400 hover:text-gray-600 transition-colors p-1"
 					onclick={handleCancel}
 					aria-label="Close form"
 				>
-					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -173,7 +173,7 @@
 			</div>
 
 			<!-- Priority and Category Row -->
-			<div class="grid grid-cols-2 gap-4 mb-6">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
 				<!-- Priority Field -->
 				<div>
 					<label for="priority" class="block text-sm font-medium text-gray-700 mb-1">
@@ -210,17 +210,17 @@
 			</div>
 
 			<!-- Action Buttons -->
-			<div class="flex gap-3 justify-end">
+			<div class="flex flex-col-reverse sm:flex-row gap-3 justify-end">
 				<button
 					type="button"
 					onclick={handleCancel}
-					class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+					class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
 				>
 					Cancel
 				</button>
 				<button
 					type="submit"
-					class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+					class="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
 				>
 					{isEditing ? 'Update Task' : 'Create Task'}
 				</button>

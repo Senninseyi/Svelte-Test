@@ -1,8 +1,3 @@
-/**
- * Unit tests for taskStore
- * Testing CRUD operations, derived stores, and matrix categorization logic
- */
-
 import { describe, it, expect, beforeEach } from 'vitest';
 import { get } from 'svelte/store';
 import { taskStore, matrixTasks, taskStats } from '../stores/taskStore';
@@ -46,7 +41,6 @@ describe('TaskStore - CRUD Operations', () => {
 			isComplete: false
 		});
 
-		// Small delay to ensure timestamp difference
 		await new Promise((resolve) => setTimeout(resolve, 10));
 
 		const updatedTask = taskStore.update(task.id, {
@@ -120,9 +114,8 @@ describe('TaskStore - Matrix Categorization Logic', () => {
 	});
 
 	it('should correctly categorize tasks into Urgent & Important quadrant', () => {
-		// High priority + due within 48 hours = Urgent & Important
 		const now = new Date();
-		const urgentDate = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
+		const urgentDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
 
 		taskStore.add({
 			title: 'Urgent Important Task',
@@ -139,9 +132,8 @@ describe('TaskStore - Matrix Categorization Logic', () => {
 	});
 
 	it('should correctly categorize tasks into Not Urgent & Important quadrant', () => {
-		// High priority + due after 48 hours = Not Urgent & Important
 		const now = new Date();
-		const futureDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days from now
+		const futureDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 
 		taskStore.add({
 			title: 'Not Urgent Important Task',
@@ -158,9 +150,8 @@ describe('TaskStore - Matrix Categorization Logic', () => {
 	});
 
 	it('should correctly categorize tasks into Urgent & Not Important quadrant', () => {
-		// Low priority + due within 48 hours = Urgent & Not Important
 		const now = new Date();
-		const urgentDate = new Date(now.getTime() + 12 * 60 * 60 * 1000); // 12 hours from now
+		const urgentDate = new Date(now.getTime() + 12 * 60 * 60 * 1000);
 
 		taskStore.add({
 			title: 'Urgent Not Important Task',
@@ -177,9 +168,8 @@ describe('TaskStore - Matrix Categorization Logic', () => {
 	});
 
 	it('should correctly categorize tasks into Not Urgent & Not Important quadrant', () => {
-		// Low priority + due after 48 hours = Not Urgent & Not Important
 		const now = new Date();
-		const futureDate = new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000); // 10 days from now
+		const futureDate = new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000);
 
 		taskStore.add({
 			title: 'Not Urgent Not Important Task',
@@ -213,9 +203,7 @@ describe('TaskStore - Matrix Categorization Logic', () => {
 		let matrix = get(matrixTasks);
 		expect(matrix[MatrixQuadrant.UrgentImportant].length).toBe(1);
 
-		// Complete the task
 		taskStore.toggleComplete(task.id);
-
 		matrix = get(matrixTasks);
 		expect(matrix[MatrixQuadrant.UrgentImportant].length).toBe(0);
 	});
@@ -230,7 +218,6 @@ describe('TaskStore - Derived Statistics', () => {
 		const now = new Date();
 		const futureDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 
-		// Add 4 tasks, complete 2 of them
 		const task1 = taskStore.add({
 			title: 'Task 1',
 			description: 'Test',
@@ -272,7 +259,6 @@ describe('TaskStore - Derived Statistics', () => {
 		expect(stats.completed).toBe(0);
 		expect(stats.completionPercentage).toBe(0);
 
-		// Complete 2 tasks
 		taskStore.toggleComplete(task1.id);
 		taskStore.toggleComplete(task2.id);
 

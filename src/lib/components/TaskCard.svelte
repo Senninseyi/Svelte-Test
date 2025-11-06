@@ -44,7 +44,7 @@
 </script>
 
 <div
-	class="task-card border-l-4 rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 bg-white {priorityColors[
+	class="task-card border-l-4 rounded-lg shadow-sm hover:shadow-md transition-shadow p-3 sm:p-4 bg-white {priorityColors[
 		task.priority
 	]}"
 	in:fly={{ y: 20, duration: 300, easing: quintOut }}
@@ -52,11 +52,11 @@
 	role="article"
 	aria-label="Task: {task.title}"
 >
-	<div class="flex items-start gap-3">
+	<div class="flex items-start gap-2 sm:gap-3">
 		<!-- Checkbox -->
 		<button
 			type="button"
-			class="mt-1 flex-shrink-0 w-5 h-5 rounded border-2 border-gray-400 hover:border-gray-600 transition-colors flex items-center justify-center {task.isComplete
+			class="mt-0.5 sm:mt-1 shrink-0 w-5 h-5 rounded border-2 border-gray-400 hover:border-gray-600 transition-colors flex items-center justify-center {task.isComplete
 				? 'bg-green-500 border-green-500'
 				: 'bg-white'}"
 			onclick={handleToggleComplete}
@@ -65,7 +65,7 @@
 		>
 			{#if task.isComplete}
 				<svg
-					class="w-4 h-4 text-white"
+					class="w-3 h-3 sm:w-4 sm:h-4 text-white"
 					fill="none"
 					stroke="currentColor"
 					viewBox="0 0 24 24"
@@ -78,22 +78,22 @@
 
 		<!-- Content -->
 		<div class="flex-1 min-w-0">
-			<div class="flex items-start justify-between gap-2 mb-2">
+			<div class="flex items-start justify-between gap-1 sm:gap-2 mb-2">
 				<h3
-					class="font-semibold text-gray-900 {task.isComplete
+					class="text-sm sm:text-base font-semibold text-gray-900 break-words {task.isComplete
 						? 'line-through text-gray-500'
 						: ''}"
 				>
 					{task.title}
 				</h3>
-				<div class="flex gap-1">
+				<div class="flex gap-0.5 sm:gap-1 shrink-0">
 					<button
 						type="button"
-						class="p-1 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+						class="p-0.5 sm:p-1 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
 						onclick={handleEdit}
 						aria-label="Edit task"
 					>
-						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -104,11 +104,11 @@
 					</button>
 					<button
 						type="button"
-						class="p-1 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+						class="p-0.5 sm:p-1 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
 						onclick={handleDelete}
 						aria-label="Delete task"
 					>
-						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -121,20 +121,20 @@
 			</div>
 
 			{#if task.description}
-				<p class="text-sm text-gray-600 mb-2 {task.isComplete ? 'line-through' : ''}">
+				<p class="text-xs sm:text-sm text-gray-600 mb-2 {task.isComplete ? 'line-through' : ''}">
 					{task.description}
 				</p>
 			{/if}
 
-			<div class="flex flex-wrap gap-2 items-center text-xs">
+			<div class="flex flex-wrap gap-1.5 sm:gap-2 items-center text-xs">
 				<!-- Category Badge -->
-				<span class="px-2 py-1 rounded-full font-medium {categoryColors[task.category]}">
+				<span class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full font-medium {categoryColors[task.category]}">
 					{task.category}
 				</span>
 
 				<!-- Priority Badge -->
 				<span
-					class="px-2 py-1 rounded-full font-medium"
+					class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full font-medium"
 					class:bg-red-100={task.priority === TaskPriority.High}
 					class:text-red-800={task.priority === TaskPriority.High}
 					class:bg-yellow-100={task.priority === TaskPriority.Medium}
@@ -147,11 +147,11 @@
 
 				<!-- Due Date -->
 				<span
-					class="flex items-center gap-1 {isOverdue
+					class="flex items-center gap-0.5 sm:gap-1 {isOverdue
 						? 'text-red-600 font-semibold'
 						: 'text-gray-600'}"
 				>
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -159,20 +159,20 @@
 							d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
 						/>
 					</svg>
-					<span title={formatDateShort(task.dueDate)}>
+					<span title={formatDateShort(task.dueDate)} class="truncate">
 						{formatRelativeTime(task.dueDate)}
 					</span>
 				</span>
 
 				<!-- Urgent/Important Indicators -->
 				{#if task.isUrgent && !task.isComplete}
-					<span class="px-2 py-1 bg-orange-100 text-orange-800 rounded-full font-semibold">
-						⚡ Urgent
+					<span class="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-orange-100 text-orange-800 rounded-full font-semibold">
+						⚡ <span class="hidden sm:inline">Urgent</span>
 					</span>
 				{/if}
 				{#if task.isImportant && !task.isComplete}
-					<span class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full font-semibold">
-						⭐ Important
+					<span class="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-indigo-100 text-indigo-800 rounded-full font-semibold">
+						⭐ <span class="hidden sm:inline">Important</span>
 					</span>
 				{/if}
 			</div>

@@ -92,8 +92,16 @@
 </svelte:head>
 
 {#if !task}
-	<div class="flex flex-col items-center justify-center py-12" transition:fly={{ y: 20, duration: 300 }}>
-		<svg class="w-16 h-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+	<div
+		class="flex flex-col items-center justify-center py-8 sm:py-12 px-4"
+		transition:fly={{ y: 20, duration: 300 }}
+	>
+		<svg
+			class="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 mb-4"
+			fill="none"
+			stroke="currentColor"
+			viewBox="0 0 24 24"
+		>
 			<path
 				stroke-linecap="round"
 				stroke-linejoin="round"
@@ -101,23 +109,25 @@
 				d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
 			/>
 		</svg>
-		<h2 class="text-2xl font-bold text-gray-900 mb-2">Task Not Found</h2>
-		<p class="text-gray-600 mb-6">The task you're looking for doesn't exist.</p>
+		<h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Task Not Found</h2>
+		<p class="text-sm sm:text-base text-gray-600 mb-6 text-center">
+			The task you're looking for doesn't exist.
+		</p>
 		<button
 			onclick={handleBack}
-			class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+			class="px-4 sm:px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
 		>
 			Back to Dashboard
 		</button>
 	</div>
 {:else}
-	<div class="space-y-6" transition:fly={{ y: 20, duration: 300 }}>
+	<div class="space-y-4 sm:space-y-6" transition:fly={{ y: 20, duration: 300 }}>
 		<!-- Back Button -->
 		<button
 			onclick={handleBack}
-			class="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+			class="flex items-center gap-2 text-sm sm:text-base text-gray-600 hover:text-gray-900 transition-colors"
 		>
-			<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"
@@ -129,20 +139,25 @@
 		</button>
 
 		<!-- Task Details Card -->
-		<div class="bg-white rounded-lg shadow-md p-8">
+		<div class="bg-white rounded-lg shadow-md p-4 sm:p-6 md:p-8">
 			<!-- Header -->
-			<div class="flex items-start justify-between mb-6">
-				<div class="flex items-start gap-4 flex-1">
+			<div class="flex items-start justify-between mb-4 sm:mb-6 gap-3">
+				<div class="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
 					<button
 						type="button"
-						class="mt-1 flex-shrink-0 w-8 h-8 rounded border-2 border-gray-400 hover:border-gray-600 transition-colors flex items-center justify-center {task.isComplete
+						class="mt-0.5 sm:mt-1 shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded border-2 border-gray-400 hover:border-gray-600 transition-colors flex items-center justify-center {task.isComplete
 							? 'bg-green-500 border-green-500'
 							: 'bg-white'}"
 						onclick={handleToggleComplete}
 						aria-label={task.isComplete ? 'Mark as incomplete' : 'Mark as complete'}
 					>
 						{#if task.isComplete}
-							<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg
+								class="w-4 h-4 sm:w-6 sm:h-6 text-white"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
 								<path
 									stroke-linecap="round"
 									stroke-linejoin="round"
@@ -152,25 +167,25 @@
 							</svg>
 						{/if}
 					</button>
-					<div>
+					<div class="min-w-0">
 						<h1
-							class="text-3xl font-bold text-gray-900 {task.isComplete
+							class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 break-words {task.isComplete
 								? 'line-through text-gray-500'
 								: ''}"
 						>
 							{task.title}
 						</h1>
 						{#if task.isComplete}
-							<p class="text-sm text-green-600 mt-1 font-medium">✓ Completed</p>
+							<p class="text-xs sm:text-sm text-green-600 mt-1 font-medium">✓ Completed</p>
 						{/if}
 					</div>
 				</div>
-				<div class="flex gap-2">
+				<div class="flex gap-1 sm:gap-2 shrink-0">
 					<button
 						onclick={handleEdit}
-						class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+						class="px-2 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
 					>
-						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -178,13 +193,13 @@
 								d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
 							/>
 						</svg>
-						Edit
+						<span class="hidden sm:inline">Edit</span>
 					</button>
 					<button
 						onclick={handleDelete}
-						class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2"
+						class="px-2 sm:px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
 					>
-						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
@@ -192,16 +207,16 @@
 								d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
 							/>
 						</svg>
-						Delete
+						<span class="hidden sm:inline">Delete</span>
 					</button>
 				</div>
 			</div>
 
 			<!-- Description -->
 			{#if task.description}
-				<div class="mb-6">
-					<h2 class="text-lg font-semibold text-gray-900 mb-2">Description</h2>
-					<p class="text-gray-700 whitespace-pre-wrap {task.isComplete ? 'line-through' : ''}">
+				<div class="mb-4 sm:mb-6">
+					<h2 class="text-base sm:text-lg font-semibold text-gray-900 mb-2">Description</h2>
+					<p class="text-sm sm:text-base text-gray-700 whitespace-pre-wrap {task.isComplete ? 'line-through' : ''}">
 						{task.description}
 					</p>
 				</div>

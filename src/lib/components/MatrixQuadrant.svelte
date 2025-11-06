@@ -44,31 +44,33 @@
 </script>
 
 <div
-	class="quadrant-container border-2 rounded-lg p-4 {colors.bg} {colors.border} h-full flex flex-col"
+	class="quadrant-container border-2 rounded-lg p-3 sm:p-4 {colors.bg} {colors.border} h-full flex flex-col"
 	role="region"
 	aria-label="{displayName} quadrant with {taskCount} tasks"
 >
 	<!-- Header -->
-	<div class="mb-4">
+	<div class="mb-3 sm:mb-4">
 		<div class="flex items-center justify-between mb-2">
-			<h2 class="text-xl font-bold {colors.text}">
+			<h2 class="text-base sm:text-lg md:text-xl font-bold {colors.text} leading-tight">
 				{displayName}
 			</h2>
-			<span class="px-3 py-1 rounded-full bg-white {colors.text} font-semibold text-sm shadow-sm">
+			<span
+				class="px-2 sm:px-3 py-1 rounded-full bg-white {colors.text} font-semibold text-xs sm:text-sm shadow-sm shrink-0 ml-2"
+			>
 				{taskCount}
 			</span>
 		</div>
-		<p class="text-sm {colors.text} opacity-80">
+		<p class="text-xs sm:text-sm {colors.text} opacity-80">
 			{description}
 		</p>
 	</div>
 
 	<!-- Tasks List -->
-	<div class="flex-1 space-y-3 overflow-auto">
+	<div class="flex-1 space-y-2 sm:space-y-3 overflow-auto">
 		{#if tasks.length === 0}
-			<div class="text-center py-8 text-gray-500">
+			<div class="text-center py-6 sm:py-8 text-gray-500">
 				<svg
-					class="w-12 h-12 mx-auto mb-2 opacity-50"
+					class="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 opacity-50"
 					fill="none"
 					stroke="currentColor"
 					viewBox="0 0 24 24"
@@ -80,7 +82,7 @@
 						d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
 					/>
 				</svg>
-				<p class="text-sm">No tasks in this quadrant</p>
+				<p class="text-xs sm:text-sm">No tasks in this quadrant</p>
 			</div>
 		{:else}
 			{#each tasks as task (task.id)}
@@ -94,6 +96,12 @@
 
 <style>
 	.quadrant-container {
-		min-height: 300px;
+		min-height: 250px;
+	}
+
+	@media (min-width: 640px) {
+		.quadrant-container {
+			min-height: 300px;
+		}
 	}
 </style>

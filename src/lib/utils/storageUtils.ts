@@ -1,10 +1,3 @@
-/**
- * localStorage utility with throttle/debounce mechanism
- */
-
-/**
- * Throttle function - ensures function is called at most once per specified interval
- */
 export function throttle<T extends (...args: any[]) => void>(
 	func: T,
 	wait: number
@@ -29,9 +22,6 @@ export function throttle<T extends (...args: any[]) => void>(
 	};
 }
 
-/**
- * Debounce function - delays function execution until after wait time has elapsed since last call
- */
 export function debounce<T extends (...args: any[]) => void>(
 	func: T,
 	wait: number
@@ -47,13 +37,7 @@ export function debounce<T extends (...args: any[]) => void>(
 	};
 }
 
-/**
- * Safe localStorage wrapper with error handling
- */
 export const storage = {
-	/**
-	 * Get item from localStorage
-	 */
 	get<T>(key: string, defaultValue: T): T {
 		if (typeof window === 'undefined') {
 			return defaultValue;
@@ -68,9 +52,6 @@ export const storage = {
 		}
 	},
 
-	/**
-	 * Set item in localStorage
-	 */
 	set<T>(key: string, value: T): void {
 		if (typeof window === 'undefined') {
 			return;
@@ -83,9 +64,6 @@ export const storage = {
 		}
 	},
 
-	/**
-	 * Remove item from localStorage
-	 */
 	remove(key: string): void {
 		if (typeof window === 'undefined') {
 			return;
@@ -98,9 +76,6 @@ export const storage = {
 		}
 	},
 
-	/**
-	 * Clear all items from localStorage
-	 */
 	clear(): void {
 		if (typeof window === 'undefined') {
 			return;
@@ -114,9 +89,6 @@ export const storage = {
 	}
 };
 
-/**
- * Create a throttled localStorage setter
- */
 export function createThrottledStorage<T>(key: string, wait: number = 500) {
 	const throttledSet = throttle((value: T) => {
 		storage.set(key, value);
@@ -130,9 +102,6 @@ export function createThrottledStorage<T>(key: string, wait: number = 500) {
 	};
 }
 
-/**
- * Create a debounced localStorage setter
- */
 export function createDebouncedStorage<T>(key: string, wait: number = 500) {
 	const debouncedSet = debounce((value: T) => {
 		storage.set(key, value);
